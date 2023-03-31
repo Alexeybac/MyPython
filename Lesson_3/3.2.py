@@ -11,6 +11,6 @@ k = int(input('Введите K '))
 # Через СЛАЙС (копии объекта)
 print(txt1[k%len(txt1):] + txt1[:k%len(txt1)])
 # Через цикл for
-for i in range(0, k): 
+for i in range(k): 
     txt.insert(len(txt),txt.pop(0))
 print(txt)
