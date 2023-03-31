@@ -1,5 +1,6 @@
 import os
 os.system('cls')
+
 n = int(input('Введите N '))
 txt = list()
 for i in range(n):
