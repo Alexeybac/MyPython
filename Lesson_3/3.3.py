@@ -22,7 +22,9 @@ txt =list()
 for i in list_dict:
     d = i.values()
     di = list(d)
-    txt.append(di[0].strip())
+    dix = di[0]
+    dixt = dix.strip()
+    txt.append(dixt)
 txt = set(txt)
 print(f'Результат = > {txt}')
 
