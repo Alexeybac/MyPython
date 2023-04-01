@@ -16,7 +16,7 @@ def chet(f, list):
 rez = cel(int, nums)
 print(rez)
 
-rez = chet(lambda x: x % 2 == 0, cel(int, nums))
+rez = chet(lambda x: x % 2 == 0, rez)
 print(rez)
 
 rez = cel(lambda x: (x, x**2), rez)
