@@ -10,7 +10,5 @@ dict = {"AEIOULNSTRАВЕИНОРСТ": 1,
         "QZФЩЪ": 10}
 
 text = input('Введите слово:  ').upper()
-
-rez = sum([dict[i] for char in text for i in list(dict.keys()) for j in i if char == j])
-
+rez = sum([i[1] for char in text for i in dict.items() if char.upper() in i[0]])
 print(f'Общая стоимость введенного слова {rez} балла(ов).')
