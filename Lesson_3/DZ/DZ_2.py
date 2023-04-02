@@ -1,8 +1,11 @@
 import os
 os.system('cls')
 
-massiv = [int(input(f'{i+1}-е число массива: ')) 
-    for i in range(int(input('Размер массива: ')))]
+# massiv = [int(input(f'{i+1}-е число массива: ')) 
+#     for i in range(int(input('Размер массива: ')))]
+
+from random import randint
+massiv = list(randint(1, 20) for _ in range(int(input('Размер массива: '))))
 import os
 os.system('cls')
 
