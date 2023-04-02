@@ -26,3 +26,5 @@ print('===========================================')
 ear = int(input('Введите проверяемый год: '))
 if (ear%4 == 0 and ear%100 != 0) or ear%400 == 0:
     print('Високосный!')
+
+    She sells sea shells on the sea shore The shells that she sells are sea shells I'm sure.So if she sells sea shells on the sea shore I'm sure that the shells are sea shore shells
