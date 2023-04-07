@@ -10,4 +10,6 @@ def if_number_Fool(n):
         if n % i == 0: return 'Непростое число'
     return 'Простое число'
 
-print(if_number_Fool(int(input('введите число: '))))
+
+nums = list([i, if_number_Fool(i)] for i in range(int(input('введите число: '))))
+for i in nums: print(f'{i[0]} -> {i[1]}')
