@@ -14,6 +14,6 @@ rezult = []
 for i in range(1, N+1): rezult.append(Gpr(first, i, step))
 print(*rezult)
 #=========================
-print(*(list(first + (i - 1) * step for i in range(1, N+1)))) # Вариант в строку.
+print(*(list(first + i * step for i in range(N)))) # Вариант в строку.
 #=========================
 print(time() - start)
