@@ -1,4 +1,4 @@
-str = 'пара-ра-рам рам-пАм-парам па-ра-па-дам'
+str = 'пара-ра-рам рам-пам-парам па-ра-па-дам'
 # ===========================================
 # def Vinni(x):
 #     x = list(str.lower().split())
@@ -9,7 +9,10 @@ str = 'пара-ра-рам рам-пАм-парам па-ра-па-дам'
 #         return print('Парам пам-пам')
 # Vinni(str)
 # ==================Все в одну строку========
-print('Пам парам' if len(
-    set([sum(i.count(j) for j in list('аеёиоуыэюя'))
+print('Пам парам'
+    if len(set([sum(i.count(j) for j in list('аеёиоуыэюя'))
          for i in list(str.lower().split())])) - 1
-      else 'Парам пам-пам')
+        or all([sum(i.count(j) for j in list('аеёиоуыэюя'))
+         for i in list(str.lower().split())]) == False
+    else
+      'Парам пам-пам')
