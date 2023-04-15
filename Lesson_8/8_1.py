@@ -26,18 +26,20 @@ def add_rec():
     m = input('Введите номер телефона: ')
     c = int(id)
     all_data += [f'{c + 1}  {n} {m}']
+    all_data = form_file(all_data)
     with open(file_base, "w", encoding="utf-8") as f:
         [f.write(i + '\n') for i in all_data]
 
 def del_rec():
     show_all()
     dell = input('Введите номер удаляемой строки: ')
-    rezult = [i for i in all_data if not dell in i]
+    rezult = [i for i in all_data if not dell in i.split()[0]]
     id = 1
     rez = []
     for i in rezult:
-        rez.append(f'{id}  {i[3:]}')
+        rez.append(f'{id}  {i[4:]}')
         id += 1
+    rez = form_file(rez)
     with open(file_base, "w", encoding="utf-8") as f:
         [f.write(str(i) + '\n') for i in rez]
 
@@ -64,9 +66,10 @@ def import_rec():
         file_base = "base.txt"
         return print('Размер справочника будет максимальным.')
     for i in old_file:
-        all_data.append(f'{id}  {i[3:]}')
+        all_data.append(f'{id}  {i[4:]}')
         id += 1
     file_base = "base.txt"
+    all_data = form_file(all_data)
     with open(file_base, "w", encoding="utf-8") as f:
         [f.write(i + '\n') for i in all_data]
 
@@ -85,8 +88,9 @@ def export_rec():
         if len(old_data) + len(all_data) >= 1000:
             return print('Размер справочника будет максимальным.')
         for i in all_data:
-            rez.append(f'{id}  {i[3:]}')
+            rez.append(f'{id} {i[4:]}')
             id += 1
+        rez = form_file(rez)
         [f.write(line + '\n') for line in rez]
 
 def off_menu():
@@ -107,6 +111,15 @@ def off_menu():
             case _:
                 print('Непонятный выбор, попробуйте заново\n'.upper())
 
+def form_file(x):
+    return [f'{i.split()[0]:4}{i.split()[1]} {i.split()[2]} {i.split()[3]}  {i.split()[4]}' for i in x]
+
+def format_file():
+    global all_data
+    all_data = form_file(all_data)
+    with open(file_base, "w", encoding="utf-8") as f:
+        [f.write(i + '\n') for i in all_data]
+
 def main_menu():
     flag = True
     while flag:
@@ -116,8 +129,9 @@ def main_menu():
                      '2. Добавить запись\n'
                      '3. Удалить запись\n'
                      '4. Найтить запись\n'
-                     '5. Работа со справочником\n'
-                     '6. Выход\n'
+                     '5. Export/Import\n'
+                     '6. Форматировать справочник\n'
+                     '7. Выход\n'
                      'Введите вариант: ')
         match menu:
             case '1':
@@ -131,6 +145,8 @@ def main_menu():
             case '5':
                 off_menu()
             case '6':
+                format_file()
+            case '7':
                 flag = False
             case _:
                 print('Непонятный выбор, попробуйте заново\n'.upper())
