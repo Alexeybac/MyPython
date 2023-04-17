@@ -7,6 +7,7 @@ if not path.exists(file_base):
     with open(file_base, "w", encoding="utf-8") as _:
         pass
 
+
 def read_file():
     global all_data
     global id
@@ -16,19 +17,42 @@ def read_file():
             id = all_data[-1].split()[0]
         return all_data
 
+
+def correction_data(n):
+    data = input(f'Введите {n}: ')
+    while True:
+        if n in 'Фамилия Имя Отчество':
+            if data.upper().isalpha():
+                break
+        if n == 'Введите номер телефона: ':
+            if data.isdigit() and len(data) == 11:
+                break
+        data = input(f'Ввод не правильный \n'
+                     f'Используйте только буквы'
+                     f'алфавита, или цифры, но'
+                     f'количество цифр не более 11ти!\n'
+                     f'Введите {n}: ')
+    return str(data)
+
+
 def show_all():
     print(*all_data, sep='\n')
+
 
 def add_rec():
     global id
     global all_data
-    n = input("Введите Фамилия Имя и Отчество через пробел: ")
-    m = input('Введите номер телефона: ')
+    dat = ["Имя", "Фамилия", "Отчество", 'Введите номер телефона: ']
+    n = []
+    for i in dat:
+        n.append(correction_data(i))
     c = int(id)
-    all_data += [f'{c + 1}  {n} {m}']
+    n = ' '.join(n)
+    all_data += [f'{(c + 1)}   {n}']
     all_data = form_file(all_data)
     with open(file_base, "w", encoding="utf-8") as f:
         [f.write(i + '\n') for i in all_data]
+
 
 def del_rec():
     show_all()
@@ -40,8 +64,11 @@ def del_rec():
         rez.append(f'{id}  {i[4:]}')
         id += 1
     rez = form_file(rez)
+    x = '\n'
     with open(file_base, "w", encoding="utf-8") as f:
-        [f.write(str(i) + '\n') for i in rez]
+   #    [f.write(str(i) + '\n') for i in rez] # или f.write(f'{x.join(rez)}\n')
+        f.write(f'{x.join(rez)}\n')
+
 
 def find_rec():
     find_str = input('Введите чего нибудь: ').upper()
@@ -49,6 +76,7 @@ def find_rec():
     print()
     [[print(i) for i in rezult] if rezult else print('Записи с таким вариантом букв не найдены!'.upper())]
     print('==========Конец поиска=============')
+
 
 def import_rec():
     global file_base
@@ -73,6 +101,7 @@ def import_rec():
     with open(file_base, "w", encoding="utf-8") as f:
         [f.write(i + '\n') for i in all_data]
 
+
 def export_rec():
     id = 0
     path_file = input('Введите название файла, куда экспортировать данные: ') + '.txt'
@@ -93,6 +122,7 @@ def export_rec():
         rez = form_file(rez)
         [f.write(line + '\n') for line in rez]
 
+
 def off_menu():
     flag = True
     while flag:
@@ -111,14 +141,17 @@ def off_menu():
             case _:
                 print('Непонятный выбор, попробуйте заново\n'.upper())
 
+
 def form_file(x):
     return [f'{i.split()[0]:4}{i.split()[1]} {i.split()[2]} {i.split()[3]}  {i.split()[4]}' for i in x]
+
 
 def format_file():
     global all_data
     all_data = form_file(all_data)
     with open(file_base, "w", encoding="utf-8") as f:
         [f.write(i + '\n') for i in all_data]
+
 
 def main_menu():
     flag = True
@@ -150,6 +183,7 @@ def main_menu():
                 flag = False
             case _:
                 print('Непонятный выбор, попробуйте заново\n'.upper())
+
 
 main_menu()
 
